@@ -9,12 +9,15 @@ interface Header extends HeadersDefaults {
   'Content-Type': string
 }
 
-(axios.defaults.headers as Header)['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8'
+// (axios.defaults.headers as Header)['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8'
+(axios.defaults.headers as Header)['Content-Type'] = 'application/json'
 
 // 返回数据格式
 interface Response<T> {
-  stat: string,
-  data: T
+  code: number,
+  data: T,
+  errorMsg: T,
+  success: boolean
 }
 
 const service = axios.create({

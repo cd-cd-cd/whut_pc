@@ -1,36 +1,71 @@
 import React, { useState } from 'react'
 import { Button, Form, Input, message } from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons'
-import { getCode, testButton } from '../../api/user'
+import { getCode, register } from '../../api/user'
 import style from './index.module.scss'
 
 export default function LoginMain () {
-  const onFinish = (values: any) => {
-    console.log('Success:', values);
-  }
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-  }
-
   const [email, setEmail] = useState('')
 
-  const getCodeClick = async () => {
+  // const onFinishFailed = (errorInfo: any) => {
+  //   console.log('Failed:', errorInfo);
+  // }
+
+  // 检查邮箱
+  const checkEmail = (email: string) => {
     if (email.length === 0) {
       message.info('邮箱不为空')
+      return false
     } else if (email.length !== 18 || email.slice(6) !== '@whut.edu.cn') {
       message.info('邮箱格式不正确')
+      return false
     } else {
-      const res = await getCode(email)
-      console.log(res, res?.stat)
-      // message.success('验证码已发送，请稍后')
-      // console.log('success')
+      return true
     }
   }
 
-  const test = async () => {
-    const res = await testButton()
-    console.log(res)
+  // 发送验证码
+  const getCodeClick = async () => {
+    if (checkEmail(email)) {
+      message.loading({ content: '正在发送...', key: 'sendCode' })
+      const res = await getCode(email)
+      if (res?.code === 200) {
+        console.log(res)
+        message.success({ content: '验证码发送成功，请前往邮箱查看', key: 'sendCode' })
+      } else {
+        message.error({ content: '验证码发送失败，请稍后重试', key: 'sendCode' })
+      }
+    }
+  }
+
+  // 注册按钮
+  const onFinish = async (values: any) => {
+    const { email, code, password, rePassword } = values
+    if (checkEmail(email)) {
+      if (code.length === 0) {
+        message.info("验证码不为空")
+      } else if (password !== rePassword) {
+        message.info("密码不一致，请重新输入!")
+      } else {
+        message.loading({ content: '正在注册', key: 'registerCode' })
+        const res = await register(code, email, password)
+        if (res?.code === 500) {
+          message.open({
+            type: 'info',
+            content: res.errorMsg,
+            key: 'registerCode'
+          })
+        } else if (res?.code === 200) {
+          message.open({
+            type: 'success',
+            content: '注册成功!',
+            key: 'registerCode'
+          })
+        } else {
+          message.error({ content: '系统繁忙，请稍后再试', key: 'registerCode' })
+        }
+      }
+    }
   }
 
   return (
@@ -43,7 +78,6 @@ export default function LoginMain () {
         <div className={style.login_box}>
           <Form
             onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
             autoComplete="off"
             className={style.form}
           >
@@ -52,22 +86,31 @@ export default function LoginMain () {
               rules={[
                 { required: true, message: '请输入教育邮箱' }]}
             >
-              <Input placeholder='教育邮箱' className={style.input} value={email} onChange={(e) => setEmail(e.target.value)}/>
+              <Input placeholder='教育邮箱' className={style.input} value={email} onChange={(e) => setEmail(e.target.value)} />
             </Form.Item>
             <Form.Item
+            >
+              <Form.Item
               name='code'
+              noStyle
               rules={[
                 { required: true, message: '请输入验证码' }
               ]}
-            >
-              <Input placeholder='验证码' className={style.input_code} />
-              <Button type='primary' className={style.getCode} onClick={() => getCodeClick()}>点击获取验证码</Button>
+              >
+                <Input placeholder='验证码' className={style.input_code} />
+              </Form.Item>
+              <Form.Item
+              noStyle
+              >
+                <Button type='primary' className={style.getCode} onClick={() => getCodeClick()}>点击获取验证码</Button>
+              </Form.Item>
             </Form.Item>
             <Form.Item
               name='password'
               rules={[
                 { required: true, message: '请输入密码' },
-                { min: 6, max: 16, message: '密码长度为6-16位' }
+                { min: 6, max: 16, message: '密码长度为6-16位' },
+                { pattern: /^[A-Za-z0-9]+$/, message: '密码只能包含字母，数字' }
               ]}>
               <Input.Password
                 placeholder='密码'
@@ -76,10 +119,11 @@ export default function LoginMain () {
               ></Input.Password>
             </Form.Item>
             <Form.Item
-              name='re_password'
+              name='rePassword'
               rules={[
                 { required: true, message: '请输入密码' },
-                { min: 6, max: 16, message: '密码长度为6-16位' }
+                { min: 6, max: 16, message: '密码长度为6-16位' },
+                { pattern: /^[A-Za-z0-9]+$/, message: '密码只能包含字母，数字' }
               ]}>
               <Input.Password
                 placeholder='确认密码'
@@ -87,13 +131,11 @@ export default function LoginMain () {
                 className={style.input}
               ></Input.Password>
             </Form.Item>
-            <Form.Item
-            >
+            <Form.Item>
               <div className={style.span}>已经注册，账号登录</div>
               <Button htmlType="submit" type='primary' className={style.button}>注册</Button>
             </Form.Item>
           </Form>
-          <button onClick={() => test()}>test</button>
         </div>
       </div>
     </div>
