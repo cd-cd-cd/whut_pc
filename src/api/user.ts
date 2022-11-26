@@ -14,6 +14,13 @@ interface ReRegister {
   success: boolean
 }
 
+interface ReLogin {
+  code: number
+  data: any
+  errorMsg: string
+  success: boolean
+}
+
 // 教育邮箱发送验证码
 export const getCode = async (email: string) => {
   return await request<ReGetCode>({
@@ -34,13 +41,26 @@ export const testButton = async () => {
 
 // 注册用户
 export const register = async (code: string, email: string, password: string) => {
-  return await request<ReRegister>({
+  return await request<ReLogin>({
     url: '/user/create',
     method: 'POST',
     data: {
       code,
       email,
       password
+    }
+  })
+}
+
+// 登录
+export const login = async (email: string, password: string, code?: string) => {
+  return await request<ReRegister>({
+    url: '/user/login',
+    method: 'POST',
+    data: {
+      email,
+      password,
+      code
     }
   })
 }

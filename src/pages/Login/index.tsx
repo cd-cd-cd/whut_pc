@@ -1,8 +1,8 @@
 import React from 'react'
 import style from './index.module.scss'
 import LoginBottom from '../../components/LoginBottom'
-import LoginMain from '../../components/LoginMain'
 import LoginHeader from '../../components/LoginHeader'
+import LoginMain from '../../components/LoginMain'
 
 export default function Login () {
   return (
