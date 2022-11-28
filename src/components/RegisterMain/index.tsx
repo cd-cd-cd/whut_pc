@@ -30,6 +30,12 @@ export default function RegisterMain () {
       if (res?.code === 200) {
         console.log(res)
         message.success({ content: '验证码发送成功，请前往邮箱查看', key: 'sendCode' })
+      } else if (res?.code === 500) {
+        message.open({
+          type: 'info',
+          content: res.errorMsg,
+          key: 'sendCode'
+        })
       } else {
         message.error({ content: '验证码发送失败，请稍后重试', key: 'sendCode' })
       }
@@ -93,16 +99,16 @@ export default function RegisterMain () {
             <Form.Item
             >
               <Form.Item
-              name='code'
-              noStyle
-              rules={[
-                { required: true, message: '请输入验证码' }
-              ]}
+                name='code'
+                noStyle
+                rules={[
+                  { required: true, message: '请输入验证码' }
+                ]}
               >
                 <Input placeholder='验证码' className={style.input_code} />
               </Form.Item>
               <Form.Item
-              noStyle
+                noStyle
               >
                 <Button type='primary' className={style.getCode} onClick={() => getCodeClick()}>点击获取验证码</Button>
               </Form.Item>

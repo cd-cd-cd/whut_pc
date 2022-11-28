@@ -1,0 +1,86 @@
+@mixin alignCenter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.init {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  .nav {
+    background-color: fff;
+    height: 80px;
+    box-shadow: 0 0 10px 0 rgb(58 58 58 / 7%);
+    z-index: 99;
+  }
+
+  .main {
+    flex: 1;
+    background-color: rgb(240, 248, 255);
+    @include alignCenter()
+  }
+}
+
+.initBox {
+  width: 600px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+
+  .avatar {
+    width: 100%;
+    height: 135px;
+    box-shadow: 0 0 10px 0 rgb(58 58 58 / 7%);
+    background-color: #fff;
+    margin-bottom: 20px;
+    @include alignCenter();
+
+    .avatar_box {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background-color: rgb(245, 248, 251);
+      cursor: pointer;
+    }
+  }
+
+  .info {
+    flex: 1;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 0 10px 0 rgb(58 58 58 / 7%);
+
+    .form{
+      width: 80%;
+      margin: 30px auto 0 auto;
+    }
+  }
+}
+
+.radioGroup{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+  .button{
+    width: 150px;
+  }
+}
+
+.underline{
+  width: 100%;
+  border-bottom: 1px solid #1890ff;
+}
+
+.sex{
+  margin-top: -20px;
+}
