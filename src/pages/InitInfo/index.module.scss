@@ -37,14 +37,6 @@
     background-color: #fff;
     margin-bottom: 20px;
     @include alignCenter();
-
-    .avatar_box {
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      background-color: rgb(245, 248, 251);
-      cursor: pointer;
-    }
   }
 
   .info {
@@ -55,7 +47,7 @@
 
     .form{
       width: 80%;
-      margin: 30px auto 0 auto;
+      margin: 50px auto 0 auto;
     }
   }
 }
@@ -79,8 +71,20 @@
 .underline{
   width: 100%;
   border-bottom: 1px solid #1890ff;
+  margin-bottom: 30px;
+  margin-top: -10px;
 }
 
 .sex{
   margin-top: -20px;
+}
+
+.setImg{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -64,3 +64,16 @@ export const login = async (email: string, password: string, code?: string) => {
     }
   })
 }
+
+// // 上传头像
+// export const avatar = async () => {
+//   return await request({
+//     url: '/user/uploadAvatar',
+//     method: 'POST',
+//     data: {
+//       email,
+//       password,
+//       code
+//     }
+//   })
+// }
