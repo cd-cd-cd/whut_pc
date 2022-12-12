@@ -25,6 +25,7 @@ export default function InitInfo () {
     if (!isPNG) {
       message.error(`${file.name} 不是一个png或jpeg格式的文件`)
     }
+    console.log(file.size / 1024 / 1024)
     const isLt1M = file.size / 1024 / 1024 < 1
     if (!isLt1M) {
       message.error('图片要小于1MB!')

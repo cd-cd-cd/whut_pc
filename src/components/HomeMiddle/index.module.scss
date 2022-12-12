@@ -1,0 +1,13 @@
+.mid{
+  width: 640px;
+  height: 100%;
+  background-color: azure;
+  margin: 0 15px;
+  overflow: auto;
+
+  .box{
+    width: 80%;
+    height: 1000px;
+    background-color: aqua;
+  }
+}
