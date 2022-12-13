@@ -31,6 +31,7 @@ export default function LoginMain () {
         message.info({ content: res.errorMsg })
       } else if (res?.code === 200) {
         message.success('登录成功')
+        navigator('/home')
       }
     }
   }
