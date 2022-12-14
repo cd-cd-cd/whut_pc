@@ -28,6 +28,8 @@ module.exports = {
       "@typescript-eslint/no-misused-promises": "off",
       "@typescript-eslint/no-non-null-assertion": "off",
       "@typescript-eslint/strict-boolean-expressions": "off",
-      "multiline-ternary": "off"
+      "multiline-ternary": "off",
+      "@typescript-eslint/prefer-nullish-coalescing": "off",
+      "@typescript-eslint/comma-dangle": "off"
     }
 }

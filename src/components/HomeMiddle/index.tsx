@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from 'react'
+import { context } from '../../hooks/store'
 import style from './index.module.scss'
 import './index.css'
 import MessageItem from './MessageItem'
 import SortRule from './SortRule'
-import { context } from '../../hooks/store'
+import PublicArticle from './PublicArticle'
 
 export default function HomeMiddle () {
   const { PostList } = useContext(context)
@@ -15,6 +16,7 @@ export default function HomeMiddle () {
   return (
     <div className={style.mid}>
       <div className={style.box}>
+        <PublicArticle></PublicArticle>
         <SortRule></SortRule>
         {
           PostList.map((post, index) =>
