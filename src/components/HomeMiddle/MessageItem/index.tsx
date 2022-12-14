@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import style from './index.module.scss'
 import dayjs from 'dayjs'
 import { Tag } from 'antd'
@@ -17,6 +17,9 @@ export default function MessageItem ({ post }: Props) {
   const [eye, setEye] = useState(false)
   const [heart, setHeart] = useState(false)
   const [comment, setComment] = useState(false)
+  useEffect(() => {
+    console.log(post.articleImg)
+  }, [])
 
   return (
     <div className={style.itemBox}>
@@ -43,14 +46,13 @@ export default function MessageItem ({ post }: Props) {
       </div>
       <div className={style.imgBox}>
         <div className={style.imgs}>
-          <img className={style.img} src='http://qiniu.yangxiaobai.top/2022/12/07/sadwedwqdqwdd'></img>
-          <img className={style.img} src='http://qiniu.yangxiaobai.top/2022/12/07/sadwedwqdqwdd'></img>
-          <img className={style.img} src='http://qiniu.yangxiaobai.top/2022/12/07/sadwedwqdqwdd'></img>
-          <img className={style.img} src='http://qiniu.yangxiaobai.top/2022/12/07/sadwedwqdqwdd'></img>
-          <img className={style.img} src='http://qiniu.yangxiaobai.top/2022/12/07/sadwedwqdqwdd'></img>
-          <img className={style.img} src='http://qiniu.yangxiaobai.top/2022/12/07/sadwedwqdqwdd'></img>
-          <img className={style.img} src='http://qiniu.yangxiaobai.top/2022/12/07/sadwedwqdqwdd'></img>
-          <img className={style.img} src='http://qiniu.yangxiaobai.top/2022/12/07/sadwedwqdqwdd'></img>
+          {
+            post.articleImg
+              ? post.articleImg.split(';')
+                .map((img, index) =>
+                  <img key={index} className={style.img} src={img}></img>
+                ) : null
+          }
         </div>
       </div>
       <div className={style.bottom}>

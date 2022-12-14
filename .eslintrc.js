@@ -27,6 +27,7 @@ module.exports = {
       "@typescript-eslint/promise-function-async": "off",
       "@typescript-eslint/no-misused-promises": "off",
       "@typescript-eslint/no-non-null-assertion": "off",
-      "@typescript-eslint/strict-boolean-expressions": "off"
+      "@typescript-eslint/strict-boolean-expressions": "off",
+      "multiline-ternary": "off"
     }
 }
