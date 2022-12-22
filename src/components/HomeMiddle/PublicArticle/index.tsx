@@ -1,8 +1,9 @@
-import { Button, Input, Modal, Upload, UploadFile } from 'antd'
+import { Button, Input, Modal, Select, Upload, UploadFile } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import type { RcFile, UploadProps } from 'antd/es/upload'
 import React, { useState } from 'react'
 import style from './index.module.scss'
+// import { category } from '../../../api/article'
 
 export default function PublicArticle () {
   const [putVisible, setPutVisible] = useState(false)
@@ -90,12 +91,38 @@ export default function PublicArticle () {
       <div style={{ marginTop: 8 }}>Upload</div>
     </div>
   )
+
+  const onChange = (value: string) => {
+    console.log(`selected ${value}`);
+  }
+
+  const onSearch = (value: string) => {
+    console.log('search:', value);
+  }
+  // const getCategory = async () => {
+  //   const res = await category()
+  //   console.log(res)
+  // }
+  // useEffect(() => {
+  //   getCategory()
+  // }, [])
+  const res = ['0', '2', '4', '5', '8']
   return (
     <div className={style.back}>
       {
         !putVisible ? <div className={style.infoInit} onClick={() => { setPutVisible(true) }}>发布一条信息吧</div>
           : <div>
             <div className={style.info}>信息发布</div>
+            <div className={style.select}>
+              <div className={style.catagoryTtitle}>类别</div>
+              <Select
+                showSearch
+                placeholder="选择发布类别"
+                onChange={onChange}
+                onSearch={onSearch}
+                options={res.map((item) => ({ value: item, label: item }))}
+              />
+            </div>
             <div className={style.title}>
               <div className={style.need}>*</div>
               <div className={style.titleText}>标题</div>

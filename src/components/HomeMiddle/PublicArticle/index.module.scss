@@ -60,3 +60,15 @@
 .infoInit:hover{
   background-color: #f2f2f2;
 }
+
+.select{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+  align-items: center;
+
+  .catagoryTtitle{
+    padding-left: 6px;
+    width: 56px;
+  }
+}

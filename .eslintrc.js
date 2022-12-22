@@ -30,6 +30,8 @@ module.exports = {
       "@typescript-eslint/strict-boolean-expressions": "off",
       "multiline-ternary": "off",
       "@typescript-eslint/prefer-nullish-coalescing": "off",
-      "@typescript-eslint/comma-dangle": "off"
+      "@typescript-eslint/comma-dangle": "off",
+      "no-labels": "off",
+      "@typescript-eslint/no-unused-expressions": "off"
     }
 }
