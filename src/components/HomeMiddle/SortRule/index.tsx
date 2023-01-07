@@ -1,30 +1,39 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react'
 import style from './index.module.scss'
-import { LatestArticles, HottestArticles } from '../../../api/article'
+import { LatestArticles, HottestArticles, getCategoryArray } from '../../../api/article'
 import { context } from '../../../hooks/store'
 type rule = 'lasted' | 'hottest'
 export default function SortRule () {
   const [rule, setRule] = useState<rule>('lasted')
-  const { PostList, setPostList } = useContext(context)
+  const { PostList, setPostList, categoryId, setCategoryId } = useContext(context)
 
   const getArticles = useCallback(async (type: rule) => {
-    if (type === 'lasted') {
-      const res = await LatestArticles()
+    console.log(categoryId)
+    if (categoryId >= 0) {
+      const res = await getCategoryArray(categoryId)
       if (res) {
-        setPostList(res.data.records)
+        console.log(res.data)
       }
-    } else if (type === 'hottest') {
-      const res = await HottestArticles()
-      if (res) {
-        setPostList(res.data.records)
+    } else {
+      setCategoryId(-1)
+      if (type === 'lasted') {
+        const res = await LatestArticles()
+        if (res) {
+          setPostList(res.data.records)
+        }
+      } else if (type === 'hottest') {
+        const res = await HottestArticles()
+        if (res) {
+          setPostList(res.data.records)
+        }
       }
     }
-  }, [PostList, setPostList]
+  }, [PostList, setPostList, categoryId]
   )
 
   useEffect(() => {
     getArticles(rule)
-  }, [rule])
+  }, [rule, categoryId])
 
   useEffect(() => {
     getArticles(rule)

@@ -99,13 +99,6 @@ export default function PublicArticle () {
   const onSearch = (value: string) => {
     console.log('search:', value);
   }
-  // const getCategory = async () => {
-  //   const res = await category()
-  //   console.log(res)
-  // }
-  // useEffect(() => {
-  //   getCategory()
-  // }, [])
   const res = ['0', '2', '4', '5', '8']
   return (
     <div className={style.back}>

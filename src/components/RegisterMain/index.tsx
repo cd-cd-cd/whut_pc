@@ -28,7 +28,6 @@ export default function RegisterMain () {
       message.loading({ content: '正在发送...', key: 'sendCode' })
       const res = await getCode(email)
       if (res?.code === 200) {
-        console.log(res)
         message.success({ content: '验证码发送成功，请前往邮箱查看', key: 'sendCode' })
       } else if (res?.code === 500) {
         message.open({

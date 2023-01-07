@@ -29,3 +29,9 @@ export interface INewRes {
   size: number
   total: number
 }
+
+
+export interface ICategory {
+  categoryId: number
+  categoryName: string
+}

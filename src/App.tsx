@@ -10,10 +10,13 @@ import { StoreProvider } from './hooks/store'
 
 function App () {
   const [PostList, setPostList] = useState<IRecord[]>([])
+  const [categoryId, setCategoryId] = useState<number>(-1)
   return (
     <StoreProvider value={{
       PostList,
-      setPostList
+      setPostList,
+      categoryId,
+      setCategoryId
     }}>
       <BrowserRouter>
         <Routes>

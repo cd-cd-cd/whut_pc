@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { context } from '../../hooks/store'
 import style from './index.module.scss'
 import './index.css'
@@ -8,10 +8,6 @@ import PublicArticle from './PublicArticle'
 
 export default function HomeMiddle () {
   const { PostList } = useContext(context)
-
-  useEffect(() => {
-    console.log(PostList)
-  }, [PostList])
 
   return (
     <div className={style.mid}>

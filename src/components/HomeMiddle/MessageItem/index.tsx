@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import style from './index.module.scss'
 import dayjs from 'dayjs'
 import { Tag } from 'antd'
@@ -17,9 +17,6 @@ export default function MessageItem ({ post }: Props) {
   const [eye, setEye] = useState(false)
   const [heart, setHeart] = useState(false)
   const [comment, setComment] = useState(false)
-  useEffect(() => {
-    console.log(post.articleImg)
-  }, [])
 
   return (
     <div className={style.itemBox}>
